@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    @apply text-white bg-white
+}
+
+@keyframes buttonHover {
+    0% {
+        transform: translateX(0) scale(1);
+        @apply bg-main
+    }
+
+    50% {
+        transform: translateX(300px) scale(1.5);
+        @apply bg-yellow-600
+    }
+
+    100% {
+        transform: translateX(0) scale(1);
+        @apply bg-main
+    }
+}
