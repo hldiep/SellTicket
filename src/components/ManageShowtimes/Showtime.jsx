@@ -89,16 +89,19 @@ const Showtime = () => {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-  if (!formData.roomId || !formData.timestamp) {
+  setLoading(true);
+  if (!formData.room || !formData.date) {
     alert("Vui lòng chọn phòng chiếu và ngày.");
     return;
   }
   try {
-    const res = await getShowtime(formData.roomId, formData.timestamp);
+    const res = await getShowtime(formData.room, formData.date);
     if (res) setShowTimes(res);
     else alert("Không tìm thấy suất chiếu.");
   } catch (error) {
     alert("Lỗi khi tải suất chiếu: " + error.message);
+  } finally{
+    setLoading(false);
   }
 };
 
@@ -136,9 +139,6 @@ const handleAddSubmit = async (e) => {
     setEditing(showtime.id);
     setShowForm(true);
   };
-const handleTimeChange = (field, timeValue) => {
-  setFormData({ ...formData, [field]: timeValue.toISOString() });
-};
   return (
     <ClippedDrawer>
       <div className="sticky top-16 z-10 bg-white border-b shadow-sm">
@@ -192,26 +192,26 @@ const handleTimeChange = (field, timeValue) => {
                   </select>
                   <input type="date" name="timestamp" value={formData.timestamp} onChange={handleInputChange} className="outline-none p-2 border rounded" required />
                   <DatePicker
-  selected={formData.timeStart}
-  onChange={(date) => setFormData({ ...formData, timeStart: date })}
-  showTimeSelect
-  showTimeSelectOnly
-  timeIntervals={15}
-  timeCaption="Giờ bắt đầu"
-  dateFormat="HH:mm"
-  className="outline-none p-2 border rounded"
-/>
+                    selected={formData.timeStart}
+                    onChange={(date) => setFormData({ ...formData, timeStart: date })}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Giờ bắt đầu"
+                    dateFormat="HH:mm"
+                    className="outline-none p-2 border rounded"
+                  />
 
-<DatePicker
-  selected={formData.timeEnd}
-  onChange={(date) => setFormData({ ...formData, timeEnd: date })}
-  showTimeSelect
-  showTimeSelectOnly
-  timeIntervals={15}
-  timeCaption="Giờ kết thúc"
-  dateFormat="HH:mm"
-  className="outline-none p-2 border rounded"
-/>
+                  <DatePicker
+                    selected={formData.timeEnd}
+                    onChange={(date) => setFormData({ ...formData, timeEnd: date })}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Giờ kết thúc"
+                    dateFormat="HH:mm"
+                    className="outline-none p-2 border rounded"
+                  />
                   <select name="status" value={formData.status} onChange={handleInputChange} className="outline-none p-2 border rounded">
                     <option value="ACTIVE">ACTIVE</option>
                     <option value="DELETE">DELETE</option>
