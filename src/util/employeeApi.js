@@ -1,6 +1,7 @@
 import axios from "axios";
+import { env } from "./Contrainst";
 
-const API_URL = '/user-service/api/employment';
+const API_URL = `${env.url.API_BASE_URL}/user-service/api/employment`;
 export const getAllEmployee = async () => {
     try {
             const token = localStorage.getItem('token');

@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = "/film-service/api/slider"
+import { env } from "./Contrainst";
+const API_URL = `${env.url.API_BASE_URL}/film-service/api/slider`
 export const getSlider = async () => {
     try {
         const response = await axios.get(`${API_URL}/get`);

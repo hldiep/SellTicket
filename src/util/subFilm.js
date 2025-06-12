@@ -1,6 +1,7 @@
 import axios from "axios";
+import { env } from "./Contrainst";
 
-const API_URL = "/film-service/api/subfilm"
+const API_URL = `${env.url.API_BASE_URL}/film-service/api/subfilm`
 export const getAllSubfilm = async () => {
     try {
             const token = localStorage.getItem('token');

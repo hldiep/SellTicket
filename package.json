@@ -2,7 +2,6 @@
   "name": "hello-react",
   "version": "1.0.0",
   "private": true,
-  "proxy": "http://localhost:6380/doctorhoai/proxy",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -22,7 +21,7 @@
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
     "react-table": "^7.8.0",
-    "react-time-picker": "^6.14.2",
+    "react-time-picker": "^6.13.0",
     "recharts": "^2.15.1",
     "swiper": "^11.2.2",
     "web-vitals": "^2.1.4"

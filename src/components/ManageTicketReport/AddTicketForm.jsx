@@ -59,7 +59,7 @@ const AddTicketForm = () => {
                     </button>
                     <span>/</span>
                     <button
-                        onClick={() => navigate('/bao-cao-so-luong-ve')}
+                        onClick={() => navigate('/quan-ly-ve')}
                         className="hover:underline text-blue-600"
                     >
                         Quản lý vé

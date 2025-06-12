@@ -1,4 +1,6 @@
-const API_URL = "/filmshowtime-service/api/filmshowtime";
+import { env } from "./Contrainst";
+
+const API_URL = `${env.url.API_BASE_URL}/filmshowtime-service/api/filmshowtime`;
 
 export const addShowtimeFilm = async () => {
   try {

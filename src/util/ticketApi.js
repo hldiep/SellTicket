@@ -1,6 +1,7 @@
 import axios from "axios";
+import { env } from "./Contrainst";
 
-const API_URL = "/payment-service/api/ticket"
+const API_URL = `${env.url.API_BASE_URL}/payment-service/api/ticket`
 export const getAllTickets = async ({
   limit = 10,
   page = 0,
