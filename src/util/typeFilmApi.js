@@ -1,5 +1,5 @@
 import axios from "axios";
-import { env } from "./Contrainst";
+import { env } from "../components/config/env";
 
 const API_URL = `${env.url.API_BASE_URL}/film-service/api/typefilm`
 export const getTypeFilm = async () => {

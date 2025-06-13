@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { env } from "./Contrainst";
+import { env } from "../components/config/env";
+// import { env } from "./Contrainst";
 
 const AuthContext = createContext(null);
 

@@ -1,4 +1,4 @@
-import { env } from "./Contrainst";
+import { env } from "../components/config/env";
 
 const API_URL = `${env.url.API_BASE_URL}/filmshowtime-service/api/filmshowtime`;
 

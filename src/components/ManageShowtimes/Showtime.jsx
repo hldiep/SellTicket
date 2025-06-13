@@ -5,8 +5,7 @@ import { getBranch } from "../../util/branchApi";
 import { getRoomByBranch } from "../../util/roomApi";
 import { addShowtimeFilm, getShowtime } from "../../util/showtimeApi";
 import { getAllSubfilm } from "../../util/subFilm";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 const Showtime = () => {
   const [cinemas, setCinemas] = useState([]);
   const [selectedCinema, setSelectedCinema] = useState(null);
@@ -191,25 +190,17 @@ const handleAddSubmit = async (e) => {
                     {rooms.map(room => <option key={room.id} value={room.id}>{room.name}</option>)}
                   </select>
                   <input type="date" name="timestamp" value={formData.timestamp} onChange={handleInputChange} className="outline-none p-2 border rounded" required />
-                  <DatePicker
-                    selected={formData.timeStart}
-                    onChange={(date) => setFormData({ ...formData, timeStart: date })}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={15}
-                    timeCaption="Giờ bắt đầu"
-                    dateFormat="HH:mm"
+                  <input
+                    type="time"
+                    value={formData.timeStart}
+                    onChange={(e) => setFormData({ ...formData, timeStart: e.target.value })}
                     className="outline-none p-2 border rounded"
                   />
 
-                  <DatePicker
-                    selected={formData.timeEnd}
-                    onChange={(date) => setFormData({ ...formData, timeEnd: date })}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={15}
-                    timeCaption="Giờ kết thúc"
-                    dateFormat="HH:mm"
+                  <input
+                    type="time"
+                    value={formData.timeEnd}
+                    onChange={(e) => setFormData({ ...formData, timeEnd: e.target.value })}
                     className="outline-none p-2 border rounded"
                   />
                   <select name="status" value={formData.status} onChange={handleInputChange} className="outline-none p-2 border rounded">
