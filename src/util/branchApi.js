@@ -1,7 +1,7 @@
 import axios from "axios";
 import { env } from "../components/config/env";
 
-const API_URL = `${env.url.API_BASE_URL}/room-service/api/branch`
+const API_URL = `/room-service/api/branch`
 export const getBranch = async () => {
     try {
         const response = await axios.get(`${API_URL}/all`);

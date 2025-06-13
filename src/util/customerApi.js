@@ -1,7 +1,7 @@
 import axios from "axios";
 import { env } from "../components/config/env";
 
-const API_URL = `${env.url.API_BASE_URL}/user-service/api/customer`;
+const API_URL = `/user-service/api/customer`;
 export const getAllCustomer = async () => {
     try {
         const token = localStorage.getItem('token');

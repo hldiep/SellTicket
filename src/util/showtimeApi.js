@@ -1,16 +1,17 @@
 import { env } from "../components/config/env";
 
-const API_URL = `${env.url.API_BASE_URL}/filmshowtime-service/api/filmshowtime`;
+const API_URL = `/filmshowtime-service/api/filmshowtime`;
 
-export const addShowtimeFilm = async () => {
+export const addShowtimeFilm = async (payload) => {
   try {
-    const token=localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const response = await fetch(`${API_URL}/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(payload), 
     });
 
     if (!response.ok) {
@@ -28,6 +29,7 @@ export const addShowtimeFilm = async () => {
     return null;
   }
 };
+
 export const getShowtime = async (roomId, date) => {
   try {
     const token = localStorage.getItem("token");

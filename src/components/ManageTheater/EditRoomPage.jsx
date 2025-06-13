@@ -179,11 +179,11 @@ const handleDeleteRoom = async () => {
             </div>
             <div className='min-h-screen bg-gray-50'>
                 <div className='container'>
-                    {loading ? (
-                        <div className="flex justify-center items-center py-10">
-                            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-r-transparent"></div>
-                            <div className="ml-4 text-blue-600 font-medium text-lg">Đang tải dữ liệu...</div>
-                        </div>
+                    {loading || !room ? (
+  <div className="flex justify-center items-center py-10">
+    <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-r-transparent"></div>
+    <div className="ml-4 text-blue-600 font-medium text-lg">Đang tải dữ liệu...</div>
+  </div>
                     ) : (
                         <div className='mt-5'>
                             <button

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { env } from "../components/config/env";
-const API_URL = `${env.url.API_BASE_URL}/film-service/api/slider`
+const API_URL = `/film-service/api/slider`
 export const getSlider = async () => {
     try {
         const response = await axios.get(`${API_URL}/get`);

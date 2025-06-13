@@ -16,7 +16,7 @@ const Showtime = () => {
   const [loading, setLoading] = useState(true);
   const [rooms, setRooms] = useState([]);
   const [formData, setFormData] = useState({
-  timeStart: null,  // dùng Date object
+  timeStart: null,  
   timeEnd: null,
   timestamp:"",
   status: "ACTIVE",
@@ -106,25 +106,35 @@ const Showtime = () => {
 
 const handleAddSubmit = async (e) => {
   e.preventDefault();
-  const { timestamp, timeStart, timeEnd, ...rest } = formData;
 
-  const fullStart = new Date(`${timestamp}T${timeStart.toTimeString().slice(0, 5)}:00`);
-  const fullEnd = new Date(`${timestamp}T${timeEnd.toTimeString().slice(0, 5)}:00`);
+  const { timestamp, timeStart, timeEnd, roomId, subFilmId, status } = formData;
+
+  if (!timestamp || !timeStart || !timeEnd || !roomId || !subFilmId) {
+    alert("Vui lòng nhập đầy đủ thông tin.");
+    return;
+  }
+
+  const fullStart = new Date(`${timestamp}T${timeStart}:00`);
+  const fullEnd = new Date(`${timestamp}T${timeEnd}:00`);
 
   const payload = {
-    ...rest,
-    timestamp,
     timeStart: fullStart.toISOString(),
-    timeEnd: fullEnd.toISOString()
+    timeEnd: fullEnd.toISOString(),
+    timestamp,
+    status,
+    subFilmId,
+    roomId
   };
 
   try {
     const res = await addShowtimeFilm(payload);
-    console.log("Cập nhật thành công:", res.data);
+    console.log("Dữ liệu gửi lên:", payload);
+    console.log("Thêm lịch chiếu thành công:", res.data);
   } catch (error) {
     console.error("Lỗi khi gửi request:", error);
   }
 };
+
 
   const handleEdit = (showtime) => {
     setFormData({

@@ -1,36 +1,30 @@
-# Stage 1: Build React app
-FROM node:18-alpine AS build
-
+# --- BUILD REACT APP ---
+FROM node:18 AS build
 WORKDIR /app
 
-# Copy và cài dependencies
+# Copy package.json và package-lock.json trước để cache dependencies
 COPY package.json package-lock.json ./
-RUN npm install --frozen-lockfile
+RUN npm install --legacy-peer-deps
 
 # Copy toàn bộ mã nguồn
 COPY . .
 
-# Truyền biến môi trường build-time
+# Truyền biến môi trường
 ARG REACT_APP_API_BASE_URL
-ARG REACT_APP_PUBLIC_KEY
-ARG REACT_APP_OAUTH2_REDIRECT_URI
-
-ENV REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
-ENV REACT_APP_PUBLIC_KEY=${REACT_APP_PUBLIC_KEY}
-ENV REACT_APP_OAUTH2_REDIRECT_URI=${REACT_APP_OAUTH2_REDIRECT_URI}
+ENV REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}    
 ENV DOCKER_BUILDKIT=1
 
-# Build project
+
+# Build React App
 RUN npm run build
 
-# Stage 2: Serve with nginx
-FROM nginx:stable-alpine
+# --- DEPLOY VỚI NGINX ---
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy build output vào thư mục nginx
-COPY --from=build /app/build /usr/share/nginx/html
-
-# (Tuỳ chọn) NGINX cấu hình nếu dùng React Router
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+# Expose port
 EXPOSE 80
+
+# Run Nginx
 CMD ["nginx", "-g", "daemon off;"]
